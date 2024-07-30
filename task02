@@ -1,0 +1,44 @@
+from PIL import Image #type: ignore
+import numpy as np #type: ignore
+
+def encrypt_image(input_path, output_path, key):
+    image = Image.open(input_path)
+    pixels= image.load()
+
+
+    width, height = image.size
+
+    for i in range(width):
+        for j in range(height):
+            r,g,b = pixels[i,j]
+
+            encrypted_pixels = (b,g,r)
+            pixels[i,j] = encrypted_pixels
+
+        image.save(output_path)
+        print("Image Encrypted Successfully")
+
+
+def decrypt_image(input_path, output_path, key):
+    image = Image.open(input_path)
+    pixels= image.load()
+
+    width, height = image.size
+    
+    for i in range(width):
+        for j in range(height):
+            r,g,b = pixels[i,j]
+
+            decrypted_pixels = (b,g,r)
+            pixels[i,j] = decrypted_pixels
+
+        image.save(output_path)
+        print("Image decrypted Successfully")
+
+input_image = r"/Users/ankittiwari/Desktop/task2/1.jpg"
+encrypted_image = r"/Users/ankittiwari/Desktop/task2/encrypted.jpg"
+decrypted_image = r"/Users/ankittiwari/Desktop/task2/decrypted.jpg"
+
+encrypt_image(input_image, encrypted_image, key=None)
+
+decrypt_image(input_image, decrypted_image, key=None)
